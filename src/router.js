@@ -15,6 +15,7 @@ export default new Router({
     {
       path: '/',
       name: 'baseLayout',
+      component: () => import('./views/baseLayout.vue'),
       children:[
         {
           path: 'news',
@@ -45,9 +46,7 @@ export default new Router({
             title: 'personal Page',
           }
         },
-      ],
-      component: () => import('./views/baseLayout.vue')
-
+      ]
     },
     {
       path: '/about',

@@ -1,9 +1,8 @@
-import request from '@/utils/request'
+import request from '../utils/request'
 
 export function fetchList(query) {
   return request({
-    baseURL:'',
-    url: '/article/list',
+    url: 'satinGodApi',
     method: 'get',
     params: query
   })

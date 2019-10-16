@@ -1,6 +1,6 @@
 <template>
   <svg :class="svgClass" aria-hidden="true">
-    <use :xlink:href="iconName" @click="clickEvent()"></use>
+    <use :xlink:href="iconName"></use>
   </svg>
 </template>
 
@@ -29,21 +29,14 @@ export default {
     }
   },
   methods:{
-      clickEvent(){
-          if(this.iconClass == 'edit'){
-          this.$emit('svg-Edit-click')
-          }else if(this.iconClass == 'delete'){
-          this.$emit('svg-Delect-click')
-          }
-      }
   }
 }
 </script>
 
 <style scoped>
 .svg-icon {
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
