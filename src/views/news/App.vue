@@ -1,17 +1,14 @@
 <template>
   <div>
-    <mu-tabs
-      :value.sync="active"
-      color="red"
-      indicator-color="white"
-      full-width
-    >
+    <mu-tabs :value.sync="active" color="red" indicator-color="white" full-width>
       <mu-tab @click.native="getList('video')">视频</mu-tab>
       <mu-tab @click.native="getList('text')">文字</mu-tab>
       <mu-tab @click.native="getList('gif')">动图</mu-tab>
       <mu-tab @click.native="getList('img')">图片</mu-tab>
     </mu-tabs>
-      <component :is="currentComponent"></component> 
+    <keep-alive>
+      <component :is="currentComponent"></component>
+    </keep-alive>
   </div>
 </template>
 <script>
@@ -35,10 +32,10 @@ export default {
     mytext,
     myvideo
   },
-  computed:{
-      currentComponent(){
-          return 'my'+this.currentTabComponent
-      }
+  computed: {
+    currentComponent() {
+      return "my" + this.currentTabComponent;
+    }
   },
   methods: {
     getList(type) {
