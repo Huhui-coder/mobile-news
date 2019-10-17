@@ -19,7 +19,7 @@ export default new Router({
       children:[
         {
           path: 'news',
-          component: () => import('@/views/news.vue'),
+          component: () => import('@/views/news/App.vue'),
           name: 'news',
           meta: {
             title: 'news Page',
