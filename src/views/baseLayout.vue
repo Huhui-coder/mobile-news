@@ -34,17 +34,19 @@ export default {
   position: fixed;
   right: 0;
   bottom: 0;
-  height: 40px;
+  height: 7vh;
   width: 100%;
   text-align: center;
   .footer {
     display: flex;
+    height: 7vh;
     a {
       flex: 1;
       transition: all 0.2s;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       font-size: 12px;
     }
     .router-link-active {

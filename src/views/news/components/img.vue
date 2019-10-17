@@ -3,7 +3,7 @@
     <div class="content">
       <div v-for="item in imgData" :key="item.soureid" class="img-wrap">
         <div>
-          <img :src="item.image" alt/>
+          <img :src="item.image" alt @error="error(item,$event)"/>
         </div>
         <p>{{item.text}}</p>
       </div>
@@ -43,6 +43,9 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+     error (item, e) {  // 图片加载出错
+        e.target.src = "https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=364878ec78899e5178db32127297f50b/0823dd54564e9258d2bb2dff9f82d158ccbf4e17.jpg"
     },
     handleScroll() {
       var scrollTop =

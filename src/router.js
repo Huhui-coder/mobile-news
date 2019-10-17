@@ -15,6 +15,7 @@ export default new Router({
     {
       path: '/',
       name: 'baseLayout',
+      redirect:'/news',
       component: () => import('./views/baseLayout.vue'),
       children:[
         {
