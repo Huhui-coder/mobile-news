@@ -1,14 +1,15 @@
 <template>
   <div>
     <mu-tabs :value.sync="active" color="red" indicator-color="white" full-width>
-      <mu-tab @click.native="getList('video')">视频</mu-tab>
-      <mu-tab @click.native="getList('text')">文字</mu-tab>
-      <mu-tab @click.native="getList('gif')">动图</mu-tab>
-      <mu-tab @click.native="getList('img')">图片</mu-tab>
+      <mu-tab @click.native="getList(index)" v-for="(item,index) in tab" :key="index">{{item}}</mu-tab>
     </mu-tabs>
-    <keep-alive>
-      <component :is="currentComponent"></component>
-    </keep-alive>
+    <slide @change="slidechange">
+      <div slot="content">
+        <keep-alive>
+          <component :is="currentComponent"></component>
+        </keep-alive>
+      </div>
+    </slide>
   </div>
 </template>
 <script>
@@ -18,11 +19,13 @@ import mygif from "./components/gif";
 import myimg from "./components/img";
 import mytext from "./components/text";
 import myvideo from "./components/video";
+import slide from "@/components/slide";
 export default {
   name: "news",
   data: () => ({
     active: 0,
-    currentTabComponent: "video" //动态展示的组件
+    currentTabComponent: "video", //初始化动态展示的组件
+    tab: ["视频", "文字", "动图", "图片"]
   }),
   props: {},
   watch: {},
@@ -30,7 +33,8 @@ export default {
     mygif,
     myimg,
     mytext,
-    myvideo
+    myvideo,
+    slide
   },
   computed: {
     currentComponent() {
@@ -39,7 +43,43 @@ export default {
   },
   methods: {
     getList(type) {
-      this.currentTabComponent = type;
+      this.active = type;
+
+      switch (type) {
+        case 0:
+          this.currentTabComponent = "video";
+
+          break;
+        case 1:
+          this.currentTabComponent = "text";
+
+          break;
+        case 2:
+          this.currentTabComponent = "gif";
+
+          break;
+        case 3:
+          this.currentTabComponent = "img";
+
+          break;
+
+        default:
+          break;
+      }
+    },
+    slidechange(dir) {
+      //找到当前选中的tab在tab数组中的位置，如果是左边就+1，是右边就-1；
+      if(this.active<=0){this.active = 0}
+      if(this.active>=3){this.active = 3}
+      if(dir == 'left'){
+        this.active++;
+        this.getList(this.active)
+      }else{
+        this.active--;
+        this.getList(this.active)
+      }
+      console.log(dir + this.active);
+
     }
   }
 };

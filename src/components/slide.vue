@@ -58,10 +58,8 @@
           // 只有滑动大于一半距离才触发
           if (Math.abs(this.disX) > (slideWidth / 2)) {
             if (this.disX < 0) {
-              console.log('左滑');
               this.$emit('change', 'left')
             } else {
-              console.log('右滑');
               this.$emit('change', 'right')
             }
           }
@@ -73,7 +71,7 @@
 </script>
 <style lang="less" scoped>
 .slide{
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 </style>
