@@ -72,6 +72,7 @@
 <style lang="less" scoped>
 .slide{
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  touch-action: pan-y!important; 
 }
 </style>

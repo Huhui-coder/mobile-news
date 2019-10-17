@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <div class="content">
-      <p v-for="item in TextData" :key="item.passtime">{{item.text}}</p>
+      <p v-for="item in TextData" :key="item.username">{{item.text}}</p>
     </div>
   </div>
 </template>
@@ -70,6 +70,7 @@ export default {
 <style lang="less" scoped>
 .wrap {
   margin: 5px 0;
+  touch-action: pan-y !important;
   .video {
     width: 100vw;
     height: 25vh;

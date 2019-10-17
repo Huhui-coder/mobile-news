@@ -69,17 +69,20 @@ export default {
     },
     slidechange(dir) {
       //找到当前选中的tab在tab数组中的位置，如果是左边就+1，是右边就-1；
-      if(this.active<=0){this.active = 0}
-      if(this.active>=3){this.active = 3}
-      if(dir == 'left'){
+      if (this.active <= 0) {
+        this.active = 0;
+      }
+      if (this.active >= 3) {
+        this.active = 3;
+      }
+      if (dir == "left") {
         this.active++;
-        this.getList(this.active)
-      }else{
+        this.getList(this.active);
+      } else {
         this.active--;
-        this.getList(this.active)
+        this.getList(this.active);
       }
       console.log(dir + this.active);
-
     }
   }
 };
@@ -88,6 +91,7 @@ export default {
 <style lang="less" scoped>
 .wrap {
   margin: 5px 0;
+  touch-action: pan-y !important;
   .video {
     width: 100vw;
     height: 25vh;
