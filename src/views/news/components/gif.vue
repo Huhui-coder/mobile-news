@@ -1,9 +1,12 @@
 <template>
   <div class="wrap">
-    <div class="content">
-      <div v-for="item in gifData" :key="item.soureid" class="img-wrap">
-        <img :src="item.gif" alt />
-        <p>{{item.text}}</p>
+    <div class="content" v-for="(item,index) in gifData" :key="index">
+      <div class="avater">
+        <img :src="item.header" alt />
+      </div>
+      <div class="gif">
+        <p class="userName">{{item.username}}</p>
+        <img :src="item.gif" alt @click="open(index)" v-lazy="item.gif" />
       </div>
     </div>
   </div>
@@ -11,6 +14,8 @@
 <script>
 import { fetchList } from "@/api/article.js";
 import { debounce } from "@/utils/common";
+import { ImagePreview } from "vant";
+
 export default {
   name: "mygif",
   data: () => ({
@@ -19,7 +24,8 @@ export default {
       page: 1
     },
     page: 1, // 页码
-    gifData: []
+    gifData: [],
+    imgList: []
   }),
   props: {},
   watch: {},
@@ -32,11 +38,21 @@ export default {
   },
   computed: {},
   methods: {
+    open(index) {
+      ImagePreview({
+        images: this.imgList,
+        startPosition: index,
+        onClose() {}
+      });
+    },
     fetch() {
       let query = this.formData;
       fetchList(query)
         .then(res => {
           this.gifData = res.data.filter(item => item.type == "gif");
+          this.gifData.map(item => {
+            this.imgList.push(item.gif);
+          });
         })
         .catch(err => {
           console.log(err);
@@ -58,6 +74,10 @@ export default {
               this.gifData = this.gifData.concat(
                 res.data.filter(item => item.type == "gif")
               );
+              this.imgList = [];
+              this.gifData.map(item => {
+                this.imgList.push(item.gif);
+              });
             })
             .catch(err => {
               console.log(err);
@@ -72,15 +92,23 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
-  margin: 0;
-  padding: 0;
-  touch-action: pan-y !important;
-  text-align: center;
+  margin: 5px 0;
   .content {
-    .img-wrap {
-      width: 100vw;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    .avater {
       img {
-        width: 100vw;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .gif {
+      margin-left: 10px;
+      width: 100%;
+      img {
+        width: 90%;
       }
     }
   }

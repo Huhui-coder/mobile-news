@@ -1,11 +1,20 @@
 <template>
   <div class="wrap">
-    <div class="content">
-      <div v-for="item in imgData" :key="item.soureid" class="img-wrap">
-        <div>
-          <img :src="item.image" alt @error="error(item,$event)"/>
+    <div class="content" v-for="(item,index) in imgData" :key="index">
+      <div class="avater">
+        <img :src="item.header" alt />
+      </div>
+      <div class="gif">
+        <p class="userName">{{item.username}}</p>
+        <div class="img-wrap">
+          <img
+            :src="item.image"
+            alt
+            @error="error(item,$event)"
+            @click="open(index)"
+            v-lazy="item.image"
+          />
         </div>
-        <p>{{item.text}}</p>
       </div>
     </div>
   </div>
@@ -13,6 +22,8 @@
 <script>
 import { fetchList } from "@/api/article.js";
 import { debounce } from "@/utils/common";
+import { ImagePreview } from "vant";
+
 export default {
   name: "myimg",
   data: () => ({
@@ -22,6 +33,7 @@ export default {
     },
     page: 1, // 页码
     imgData: [],
+    imgList: []
   }),
   props: {},
   watch: {},
@@ -34,18 +46,30 @@ export default {
   },
   computed: {},
   methods: {
+    open(index) {
+      ImagePreview({
+        images: this.imgList,
+        startPosition: index,
+        onClose() {}
+      });
+    },
     fetch() {
       let query = this.formData;
       fetchList(query)
         .then(res => {
           this.imgData = res.data.filter(item => item.type == "image");
+          this.imgData.map(item => {
+            this.imgList.push(item.image);
+          });
         })
         .catch(err => {
           console.log(err);
         });
     },
-     error (item, e) {  // 图片加载出错
-        e.target.src = "https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=364878ec78899e5178db32127297f50b/0823dd54564e9258d2bb2dff9f82d158ccbf4e17.jpg"
+    error(item, e) {
+      // 图片加载出错
+      e.target.src =
+        "https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=364878ec78899e5178db32127297f50b/0823dd54564e9258d2bb2dff9f82d158ccbf4e17.jpg";
     },
     handleScroll() {
       var scrollTop =
@@ -63,6 +87,10 @@ export default {
               this.imgData = this.imgData.concat(
                 res.data.filter(item => item.type == "image")
               );
+              this.imgList = [];
+              this.imgData.map(item => {
+                this.imgList.push(item.image);
+              });
             })
             .catch(err => {
               console.log(err);
@@ -77,22 +105,28 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
-  margin: 0;
-  padding: 0;
-  touch-action: pan-y !important;
+  margin: 5px 0;
   .content {
-    .img-wrap {
-      width: 100vw;
-      height: 40vh;
-      text-align: center;
-      div{
-        height: 30vh;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    .avater {
+      img {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .gif {
+      margin-left: 10px;
+      width: 100%;
+      .img-wrap {
+        height: 35vh;
         overflow: hidden;
         img {
-        width: 100vw;
+          width: 90%;
+        }
       }
-      }
-      
     }
   }
 }

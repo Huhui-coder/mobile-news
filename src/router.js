@@ -1,10 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import baseLayout from './views/baseLayout.vue' 
-import news from './views/news.vue'
-import joke from './views/joke.vue'
-import collect from './views/collect.vue'
-import personal from './views/personal.vue'
 
 Vue.use(Router)
 

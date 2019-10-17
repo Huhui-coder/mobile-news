@@ -82,7 +82,6 @@ export default {
         this.active--;
         this.getList(this.active);
       }
-      console.log(dir + this.active);
     }
   }
 };

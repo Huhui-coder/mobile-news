@@ -1,11 +1,14 @@
 <template>
   <div class="wrap">
-    <div class="content">
-      <div v-for="item in videoData" :key="item.soureid">
-        <div class="video-wrap">
-          <video src="item.video" controls="controls" style="width:100vw;"></video>
+    <div class="content" v-for="(item,index) in videoData" :key="index">
+      <div class="avater">
+        <img :src="item.header" alt />
+      </div>
+      <div class="gif">
+        <p class="userName">{{item.username}}</p>
+        <div class="img-wrap">
+          <video :src="item.video" controls></video>
         </div>
-        <p>{{item.text}}</p>
       </div>
     </div>
   </div>
@@ -74,15 +77,27 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
-  margin: 0;
-  padding: 0;
-  touch-action: pan-y !important;
-  text-align: center;
-  .video {
-    width: 100vw;
-    height: 25vh;
-  }
+  margin: 5px 0;
   .content {
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    .avater {
+      img {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .gif {
+      margin-left: 10px;
+      width: 100%;
+      .img-wrap {
+        video {
+          width: 90%;
+        }
+      }
+    }
   }
 }
 </style>

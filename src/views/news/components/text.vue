@@ -1,7 +1,13 @@
 <template>
   <div class="wrap">
-    <div class="content">
-      <p v-for="item in TextData" :key="item.username">{{item.text}}</p>
+    <div class="content" v-for="(item,index) in TextData" :key="index">
+      <div class="avater">
+        <img :src="item.header" alt />
+      </div>
+      <div class="text">
+        <p class="userName">{{item.username}}</p>
+        <p>{{item.text}}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -59,7 +65,7 @@ export default {
             .catch(err => {
               console.log(err);
             }),
-          2000
+          1000
         );
       }
     }
@@ -70,29 +76,20 @@ export default {
 <style lang="less" scoped>
 .wrap {
   margin: 5px 0;
-  touch-action: pan-y !important;
-  .video {
-    width: 100vw;
-    height: 25vh;
-  }
   .content {
-    text-indent: 2em;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    .avater {
+      img {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .text {
+      margin-left: 10px;
+    }
   }
-}
-.tab {
-  transition: all 0.3s;
-}
-.fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.notfixed {
-  position: fixed;
-  top: -100%;
-  left: 0;
-}
-.mb {
-  margin-bottom: 72px;
 }
 </style>
