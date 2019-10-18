@@ -52,7 +52,10 @@ export default {
         document.documentElement.clientHeight || document.body.clientHeight;
       var scrollHeight =
         document.documentElement.scrollHeight || document.body.scrollHeight;
-      if (scrollTop + windowHeight == scrollHeight) {
+        console.log('scrollTop'+scrollTop)
+        console.log('windowHeight'+windowHeight)
+        console.log('scrollHeight'+scrollHeight)
+      if (scrollTop + windowHeight >= scrollHeight) {
         this.formData.page = this.page++;
         let query = this.formData;
         debounce(
@@ -61,11 +64,12 @@ export default {
               this.TextData = this.TextData.concat(
                 res.data.filter(item => item.type == "text")
               );
+              console.log('请求了')
             })
             .catch(err => {
               console.log(err);
             }),
-          1000
+          2000
         );
       }
     }
@@ -75,20 +79,25 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
-  margin: 5px 0;
+  margin: 6vw 0;
   .content {
-    padding: 15px;
     display: flex;
     flex-direction: row;
+    background-color: #fff;
+    margin: 1.2vw 0;
+    padding: 2vw;
     .avater {
       img {
         border-radius: 50%;
-        width: 50px;
-        height: 50px;
+        width: 8vw;
+        height: 8vw;
       }
     }
     .text {
-      margin-left: 10px;
+      margin-left: 1.3vw;
+      p{
+        margin-top: 4px;
+      }
     }
   }
 }

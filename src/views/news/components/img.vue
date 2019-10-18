@@ -10,7 +10,6 @@
           <img
             :src="item.image"
             alt
-            @error="error(item,$event)"
             @click="open(index)"
             v-lazy="item.image"
           />
@@ -66,11 +65,6 @@ export default {
           console.log(err);
         });
     },
-    error(item, e) {
-      // 图片加载出错
-      e.target.src =
-        "https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=364878ec78899e5178db32127297f50b/0823dd54564e9258d2bb2dff9f82d158ccbf4e17.jpg";
-    },
     handleScroll() {
       var scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
@@ -78,7 +72,7 @@ export default {
         document.documentElement.clientHeight || document.body.clientHeight;
       var scrollHeight =
         document.documentElement.scrollHeight || document.body.scrollHeight;
-      if (scrollTop + windowHeight == scrollHeight) {
+      if (scrollTop + windowHeight >= scrollHeight) {
         this.formData.page = this.page++;
         let query = this.formData;
         debounce(
@@ -105,21 +99,26 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
-  margin: 5px 0;
+  margin: 0.6vw 0;
   .content {
-    padding: 15px;
     display: flex;
     flex-direction: row;
+    background-color: #fff;
+    margin: 1.2vw 0;
+    padding: 2vw;
     .avater {
       img {
         border-radius: 50%;
-        width: 50px;
-        height: 50px;
+        width: 8vw;
+        height: 8vw;
       }
     }
     .gif {
-      margin-left: 10px;
+      margin-left: 1.3vw;
       width: 100%;
+      .userName{
+        margin-top: 4px;
+      }
       .img-wrap {
         height: 35vh;
         overflow: hidden;

@@ -65,7 +65,7 @@ export default {
         document.documentElement.clientHeight || document.body.clientHeight;
       var scrollHeight =
         document.documentElement.scrollHeight || document.body.scrollHeight;
-      if (scrollTop + windowHeight == scrollHeight) {
+      if (scrollTop + windowHeight >= scrollHeight) {
         this.formData.page = this.page++;
         let query = this.formData;
         debounce(
@@ -92,21 +92,26 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
-  margin: 5px 0;
+  margin: 0.6vw 0;
   .content {
-    padding: 15px;
     display: flex;
     flex-direction: row;
+    background-color: #fff;
+    margin: 1.2vw 0;
+    padding: 2vw;
     .avater {
       img {
         border-radius: 50%;
-        width: 50px;
-        height: 50px;
+        width: 8vw;
+        height: 8vw;
       }
     }
     .gif {
-      margin-left: 10px;
+      margin-left: 1.3vw;
       width: 100%;
+      .userName{
+        margin-top: 4px;
+      }
       img {
         width: 90%;
       }

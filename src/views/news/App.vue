@@ -89,7 +89,7 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
-  margin: 5px 0;
+  margin: 1.333vw 0;
   touch-action: pan-y !important;
   .video {
     width: 100vw;
@@ -97,7 +97,7 @@ export default {
   }
   .content {
     text-indent: 2em;
-    margin-top: 72px;
+    margin-top: 19.2vw;
   }
 }
 .tab {
@@ -114,6 +114,6 @@ export default {
   left: 0;
 }
 .mb {
-  margin-bottom: 72px;
+  margin-bottom: 19.2vw;
 }
 </style>

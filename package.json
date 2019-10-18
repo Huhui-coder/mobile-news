@@ -17,6 +17,7 @@
     "muse-ui-toast": "^0.3.0",
     "svg-sprite-loader": "^4.1.6",
     "vant": "^2.2.8",
+    "vconsole": "^3.3.4",
     "video.js": "^7.6.5",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",

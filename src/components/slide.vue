@@ -56,7 +56,7 @@
           // console.log((slideWidth / 2), 'slideWidth/2');
           this.translateX = 'translateX(0px)';
           // 只有滑动大于一半距离才触发
-          if (Math.abs(this.disX) > (slideWidth / 2)) {
+          if (Math.abs(this.disX) > (slideWidth / 6)) {
             if (this.disX < 0) {
               this.$emit('change', 'left')
             } else {
@@ -72,7 +72,7 @@
 <style lang="less" scoped>
 .slide{
   width: 100vw;
-  height: 100%;
+  height: calc(100%-7vh);
   touch-action: pan-y!important; 
 }
 </style>

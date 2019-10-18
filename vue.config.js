@@ -6,7 +6,7 @@ function resolve(dir) {
   return path.join(__dirname, '.', dir);
 }
 module.exports = {
-  baseUrl: './',
+  publicPath: './',
   //输出文件目录
   outputDir: 'dist',
   //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
